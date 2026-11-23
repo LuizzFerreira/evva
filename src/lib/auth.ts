@@ -14,6 +14,18 @@ const ALLOWED_EMAILS = [
 ];
 
 export const authService = {
+  async signInWithGoogle() {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: window.location.origin,
+      },
+    });
+
+    if (error) throw error;
+    return data;
+  },
+
   async signIn(email: string, password: string) {
     // Validar se o email está na lista de permitidos
     if (!ALLOWED_EMAILS.includes(email.toLowerCase().trim())) {
