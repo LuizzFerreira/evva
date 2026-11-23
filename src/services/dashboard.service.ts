@@ -62,7 +62,7 @@ export const dashboardService = {
       .select(`
         product_name,
         quantity,
-        price,
+        unit_price,
         sales!inner(store_id, status, created_at)
       `)
       .eq('sales.store_id', storeId)
@@ -79,7 +79,7 @@ export const dashboardService = {
       const existing = productMap.get(item.product_name) || { quantity: 0, revenue: 0 };
       productMap.set(item.product_name, {
         quantity: existing.quantity + item.quantity,
-        revenue: existing.revenue + item.quantity * item.price,
+        revenue: existing.revenue + item.quantity * item.unit_price,
       });
     });
 
