@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Spinner } from '@/components/ui/Spinner';
-import { ShoppingBag, Calendar, CreditCard, User } from 'lucide-react';
+import { ShoppingBag, Calendar, User } from 'lucide-react';
 import { salesService, Sale, SaleDetail } from '@/services/sales.service';
 import { formatCurrency } from '@/utils/currency';
 
