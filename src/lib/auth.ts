@@ -15,15 +15,17 @@ const ALLOWED_EMAILS = [
 
 export const authService = {
   async signInWithGoogle() {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: window.location.origin,
-      },
-    });
-
-    if (error) throw error;
-    return data;
+    // Construir URL manualmente para evitar bug do client
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const redirectTo = window.location.origin;
+    
+    // URL correta do OAuth
+    const authUrl = `${supabaseUrl}/auth/v1/authorize?provider=google&redirect_to=${encodeURIComponent(redirectTo)}`;
+    
+    console.log('[AUTH] Redirecionando para:', authUrl);
+    
+    // Redirecionar diretamente
+    window.location.href = authUrl;
   },
 
   async signIn(email: string, password: string) {
